@@ -1,0 +1,7 @@
+package com.gonzalodev.InventoryMgtSystem.repositories;
+
+import com.gonzalodev.InventoryMgtSystem.models.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+}
