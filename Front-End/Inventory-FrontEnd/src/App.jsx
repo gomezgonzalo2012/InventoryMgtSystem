@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage'
 import CategoryPage from './pages/CategoryPage'
 import { AdminRoute, ProtectedRoute} from './service/Guard.jsx'
 import SupplierPage from './pages/SupplierPage.jsx'
+import EditSupplierPage from './pages/AddEditSupplierPage.jsx'
 
 function App() {
 
@@ -17,6 +18,8 @@ function App() {
         {/* Admin routes */}
         <Route path='/category' element={<AdminRoute><CategoryPage /></AdminRoute>}></Route>
         <Route path='/supplier' element={<AdminRoute><SupplierPage /></AdminRoute>}></Route>
+        <Route path='/edit-supplier/:supplierId' element={<AdminRoute><EditSupplierPage /></AdminRoute>}></Route>
+        <Route path='/add-supplier' element={<AdminRoute><EditSupplierPage /></AdminRoute>}></Route>
         
         {/* Auth Routes */}
         <Route path='/dashboard' element={<Dashboard />}></Route>

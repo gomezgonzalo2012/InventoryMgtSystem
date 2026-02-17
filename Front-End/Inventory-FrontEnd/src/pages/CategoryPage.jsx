@@ -7,7 +7,7 @@ const CategoryPage = () => {
     const [message, setMessage] = useState("");
     const [categoryName, setCategoryName] = useState("");
     const [isEditing, setIsEditing] = useState(false);
-    const [editingCatId, setEditingCatId] = useState("")
+    const [editingCatId, setEditingCatId] = useState(null)
 
     const showMessage = (msg) => {
         setMessage(msg)

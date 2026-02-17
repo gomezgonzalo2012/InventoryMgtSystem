@@ -148,10 +148,13 @@ export const getAllSuppliers =async ()=>{
   return response.data;
 }
 
-export const getSupplierbyId = (id) => {
-  const response = axios.get(`${BASE_URL}/suppliers/${id}`);
+export const getSupplierbyId = async (id) => {
+  const response = await axios.get(`${BASE_URL}/suppliers/${id}`, {
+     headers: await getHeader(),
+  });  
   return response.data;
 };
+
 export const updateSupplier = async (id, supplierData) => {
   const response = await axios.put(
     `${BASE_URL}/suppliers/update/${id}`,
