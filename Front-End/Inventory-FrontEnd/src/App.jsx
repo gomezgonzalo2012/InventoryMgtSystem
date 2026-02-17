@@ -4,6 +4,8 @@ import LoginPage from './pages/Loginpage'
 import Dashboard from './pages/Dashboard'
 import RegisterPage from './pages/RegisterPage'
 import CategoryPage from './pages/CategoryPage'
+import { AdminRoute, ProtectedRoute} from './service/Guard.jsx'
+import SupplierPage from './pages/SupplierPage.jsx'
 
 function App() {
 
@@ -12,8 +14,12 @@ function App() {
       <Routes>
         <Route path='/register' element={<RegisterPage />}></Route>
         <Route path='/login' element={<LoginPage />}></Route>
+        {/* Admin routes */}
+        <Route path='/category' element={<AdminRoute><CategoryPage /></AdminRoute>}></Route>
+        <Route path='/supplier' element={<AdminRoute><SupplierPage /></AdminRoute>}></Route>
+        
+        {/* Auth Routes */}
         <Route path='/dashboard' element={<Dashboard />}></Route>
-        <Route path='/category' element={<CategoryPage />}></Route>
 
         <Route path='*' element={<LoginPage />}></Route>
       </Routes>
