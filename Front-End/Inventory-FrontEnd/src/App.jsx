@@ -7,6 +7,7 @@ import CategoryPage from './pages/CategoryPage'
 import { AdminRoute, ProtectedRoute} from './service/Guard.jsx'
 import SupplierPage from './pages/SupplierPage.jsx'
 import EditSupplierPage from './pages/AddEditSupplierPage.jsx'
+import ProductPage from './pages/ProductPage.jsx'
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
         
         {/* Auth Routes */}
         <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path='/product' element={<ProtectedRoute><ProductPage/></ProtectedRoute>}></Route>
+
 
         <Route path='*' element={<LoginPage />}></Route>
       </Routes>

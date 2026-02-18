@@ -175,6 +175,45 @@ export const deleteSupplier = async (id) => {
   return response.data;
 };
 
+// Products
+export const createProduct = async (productData) => {
+  const response = await axios.post(`${BASE_URL}/products/add`, productData, {
+    headers: await getHeader(),
+  });
+  return response.data;
+};
+
+export const getAllProducts = async () => {
+  const response = await axios.get(`${BASE_URL}/products/all`, {
+    headers: await getHeader(),
+  });
+  return response.data;
+};
+
+export const getProductbyId = async (id) => {
+  const response = await axios.get(`${BASE_URL}/products/${id}`, {
+    headers: await getHeader(),
+  });
+  return response.data;
+};
+
+export const updateProduct = async (id, productData) => {
+  const response = await axios.put(
+    `${BASE_URL}/products/update/${id}`,
+    productData,
+    {
+      headers: await getHeader(),
+    },
+  );
+  return response.data;
+};
+export const deleteProduct= async (id) => {
+  const response = await axios.delete(`${BASE_URL}/products/delete/${id}`, {
+    headers: await getHeader(),
+  });
+  return response.data;
+};
+
 // logout
 
 export const logout = () => {
