@@ -12,7 +12,7 @@ const ProductPage = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const itemsPerPage = 3;
+    const itemsPerPage = 10;
 
 
     const showMessage = (msg) => {

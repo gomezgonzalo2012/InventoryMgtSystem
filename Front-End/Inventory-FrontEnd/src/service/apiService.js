@@ -220,6 +220,28 @@ export const deleteProduct= async (id) => {
   return response.data;
 };
 
+// Transactions
+
+export const purchaseProducts = async (purchaseData)=>{
+  const response = await axios.post(`${BASE_URL}/transactions/purchase`, purchaseData, {
+    headers: {
+      ...(await getHeader())
+    },
+  });
+  return response.data;
+}
+export const sellProducts = async (sellData) => {
+  const response = await axios.post(
+    `${BASE_URL}/transactions/sale`,
+    sellData,
+    {
+      headers: {
+        ...(await getHeader()),
+      },
+    },
+  );
+  return response.data;
+};
 // logout
 
 export const logout = () => {

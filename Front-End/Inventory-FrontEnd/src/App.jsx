@@ -9,6 +9,8 @@ import SupplierPage from './pages/SupplierPage.jsx'
 import EditSupplierPage from './pages/AddEditSupplierPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import AddEditProductPage from './pages/AddEditProductPage.jsx'
+import PurchasePage from './pages/PurchasePage.jsx'
+import SellPage from './pages/SellPage.jsx'
 
 function App() {
 
@@ -24,10 +26,13 @@ function App() {
         <Route path='/add-supplier' element={<AdminRoute><EditSupplierPage /></AdminRoute>}></Route>
         <Route path='/add-product' element={<AdminRoute><AddEditProductPage /></AdminRoute>}></Route>
         <Route path='/update-product/:productId' element={<AdminRoute><AddEditProductPage /></AdminRoute>}></Route>
-        <Route path='/product' element={<ProtectedRoute><ProductPage /></ProtectedRoute>}></Route>
+        <Route path='/product' element={<AdminRoute><ProductPage /></AdminRoute>}></Route>
 
         {/* Auth Routes */}
         <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path='/purchase' element={<ProtectedRoute><PurchasePage /></ProtectedRoute>}></Route>
+        <Route path='/sell' element={<ProtectedRoute><SellPage /></ProtectedRoute>}></Route>
+
 
 
         <Route path='*' element={<LoginPage />}></Route>
