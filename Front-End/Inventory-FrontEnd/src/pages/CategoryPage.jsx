@@ -25,7 +25,7 @@ const CategoryPage = () => {
                 }
 
             }catch(error){
-                showMessage(error.response?.data?.message || "Login error : " + error);
+                showMessage(error.response?.data?.message || "Error : " + error);
             }
         }
         getCategories();

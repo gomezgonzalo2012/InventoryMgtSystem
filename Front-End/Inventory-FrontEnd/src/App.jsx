@@ -8,6 +8,7 @@ import { AdminRoute, ProtectedRoute} from './service/Guard.jsx'
 import SupplierPage from './pages/SupplierPage.jsx'
 import EditSupplierPage from './pages/AddEditSupplierPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
+import AddEditProductPage from './pages/AddEditProductPage.jsx'
 
 function App() {
 
@@ -21,10 +22,12 @@ function App() {
         <Route path='/supplier' element={<AdminRoute><SupplierPage /></AdminRoute>}></Route>
         <Route path='/edit-supplier/:supplierId' element={<AdminRoute><EditSupplierPage /></AdminRoute>}></Route>
         <Route path='/add-supplier' element={<AdminRoute><EditSupplierPage /></AdminRoute>}></Route>
-        
+        <Route path='/add-product' element={<AdminRoute><AddEditProductPage /></AdminRoute>}></Route>
+        <Route path='/update-product/:productId' element={<AdminRoute><AddEditProductPage /></AdminRoute>}></Route>
+        <Route path='/product' element={<ProtectedRoute><ProductPage /></ProtectedRoute>}></Route>
+
         {/* Auth Routes */}
         <Route path='/dashboard' element={<Dashboard />}></Route>
-        <Route path='/product' element={<ProtectedRoute><ProductPage/></ProtectedRoute>}></Route>
 
 
         <Route path='*' element={<LoginPage />}></Route>

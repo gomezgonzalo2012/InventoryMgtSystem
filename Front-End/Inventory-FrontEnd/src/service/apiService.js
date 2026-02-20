@@ -176,9 +176,12 @@ export const deleteSupplier = async (id) => {
 };
 
 // Products
-export const createProduct = async (productData) => {
-  const response = await axios.post(`${BASE_URL}/products/add`, productData, {
-    headers: await getHeader(),
+export const createProduct = async (formData) => {
+  const response = await axios.post(`${BASE_URL}/products/add`, formData, {
+    headers: {
+      ...(await getHeader()), // Mantenemos el token de autorización
+      "Content-Type": "multipart/form-data",
+    },
   });
   return response.data;
 };
@@ -197,12 +200,15 @@ export const getProductbyId = async (id) => {
   return response.data;
 };
 
-export const updateProduct = async (id, productData) => {
+export const updateProduct = async (productData) => {
   const response = await axios.put(
-    `${BASE_URL}/products/update/${id}`,
+    `${BASE_URL}/products/update`,
     productData,
     {
-      headers: await getHeader(),
+      headers: {
+        ...(await getHeader()), // Mantenemos el token de autorización
+        "Content-Type": "multipart/form-data",
+      },
     },
   );
   return response.data;

@@ -21,7 +21,7 @@ const EditSupplierPage = () => {
         }, 4000)
     }
     useEffect(() => {
-        if (supplierId != null) {
+        if (supplierId) {
 
             const fetchSupplier = async () => {
                 setIsEditing(true);
