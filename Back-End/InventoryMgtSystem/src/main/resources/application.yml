@@ -25,4 +25,8 @@ server:
       max-request-size: 10MB
 jwt:
   secret: ${JWT_SECRET}
+cloudinary:
+  cloud-name: ${CLOUDINARY_HOST_NAME}
+  api-secret: ${CLOUDINARY_API_SECRET}
+  api-key: ${CLOUDINARY_API_KEY}
 

@@ -7,6 +7,7 @@ import com.gonzalodev.InventoryMgtSystem.models.Category;
 import com.gonzalodev.InventoryMgtSystem.models.Product;
 import com.gonzalodev.InventoryMgtSystem.repositories.CategoryRepository;
 import com.gonzalodev.InventoryMgtSystem.repositories.ProductRepository;
+import com.gonzalodev.InventoryMgtSystem.services.CloudinaryService;
 import com.gonzalodev.InventoryMgtSystem.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
-    // get access to de user's working directory  (app's root directory)
-    private static final String IMAGE_DIRECTORY = System.getProperty("user.dir")+"/product-images/";
+    private final CloudinaryService cloudinaryService;
+ 
 
     @Override
     public Response saveProduct(ProductDTO productDTO, MultipartFile imageFile) {
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
         if(imageFile != null && !imageFile.isEmpty()){
             log.info("Image file exists");
 
-            String imagePath = saveImage(imageFile);
+            String imagePath = cloudinaryService.uploadFile(imageFile);
             System.out.println("IMAGE URL IS: " + imagePath);
             productToSave.setImgUrl(imagePath);
         }
@@ -63,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
         Product existingProduct = productRepository.findById(productDTO.getProductId())
                 .orElseThrow(()-> new NotFoundException("Product not found"));
         if(imageFile != null && !imageFile.isEmpty()){
-            String imagePath = saveImage(imageFile);
+            String imagePath = cloudinaryService.uploadFile(imageFile);
             existingProduct.setImgUrl(imagePath);
         }
 
@@ -149,32 +150,4 @@ public class ProductServiceImpl implements ProductService {
                 .build();
     }
 
-    public String saveImage(MultipartFile imageFile){
-        // validate that the images is not greater than 5 mb
-        if(!Objects.requireNonNull(imageFile.getContentType()).startsWith("image/") || imageFile.getSize() > 1024 * 1024 * 5){
-            throw new IllegalArgumentException("Only image files under 5mb are allowed");
-        }
-        // create the directory id it doesn't exist
-        File directory = new File(IMAGE_DIRECTORY);
-        if(!directory.exists()){
-             if(!directory.mkdir()){
-                throw new IllegalArgumentException("Unable to create the directory");
-            }
-            log.info("Directory was created");
-        }
-        // create a unique file name
-        String uniqueFileName = UUID.randomUUID() +"_"+imageFile.getOriginalFilename();
-        log.info("The file names is: {}", uniqueFileName);
-
-        String imagePath = IMAGE_DIRECTORY+uniqueFileName;
-
-       try{
-           File destinationFile = new File(imagePath);
-           // writing the image to the specific location
-           imageFile.transferTo(destinationFile);
-       } catch (Exception e) {
-           throw new IllegalArgumentException("Error saving Image: " + e.getMessage());
-       }
-       return imagePath;
-    }
 }

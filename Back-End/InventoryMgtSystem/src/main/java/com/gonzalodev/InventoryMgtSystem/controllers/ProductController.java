@@ -43,7 +43,7 @@ public class ProductController {
     @PutMapping("/update")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> updateProduct(
-            @RequestParam(value = "imageFile") MultipartFile imageFile,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "sku") String sku,
             @RequestParam(value = "price") BigDecimal price,
