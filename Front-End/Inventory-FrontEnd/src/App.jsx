@@ -13,6 +13,7 @@ import PurchasePage from './pages/PurchasePage.jsx'
 import SellPage from './pages/SellPage.jsx'
 import TransactionsPage from './pages/TransactionsPage.jsx'
 import TransactionDetailsPage from './pages/TransactionDetailsPage.jsx'
+import { ProfilePage } from './pages/ProfilePage.jsx'
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/purchase' element={<ProtectedRoute><PurchasePage /></ProtectedRoute>}></Route>
         <Route path='/sell' element={<ProtectedRoute><SellPage /></ProtectedRoute>}></Route>
+        <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}></Route>
 
 
 
