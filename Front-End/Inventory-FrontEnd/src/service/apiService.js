@@ -242,6 +242,37 @@ export const sellProducts = async (sellData) => {
   );
   return response.data;
 };
+
+export const getAllTransactions = async (page, size, filter) => {
+  const response = await axios.get(`${BASE_URL}/transactions/all`, {
+    headers: {
+      ...(await getHeader()),
+    },
+    params: {
+      page: page,
+      size: size,
+      filter: filter,
+    },
+  });
+  return response.data;
+};
+
+export const getTransactionId= async (id) => {
+  const response = await axios.get(`${BASE_URL}/transactions/${id}`, {
+    headers: {
+      ...(await getHeader()),
+    }
+  });
+  return response.data;
+};
+export const updateTransactionStatus = async (id, status) => {
+  const response = await axios.put(`${BASE_URL}/transactions/${id}`,status,  {
+    headers: {
+      ...(await getHeader()),
+    },
+  });
+  return response.data;
+};
 // logout
 
 export const logout = () => {

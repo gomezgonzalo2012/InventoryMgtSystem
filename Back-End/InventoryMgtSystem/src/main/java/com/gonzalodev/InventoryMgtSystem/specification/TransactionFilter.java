@@ -2,6 +2,7 @@ package com.gonzalodev.InventoryMgtSystem.specification;
 
 import com.gonzalodev.InventoryMgtSystem.models.Transaction;
 import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,7 +16,7 @@ public class TransactionFilter {
     public static Specification<Transaction> byFilter(String searchValue) {
         return (root, query, criteriaBuilder) -> {
             // If filter is null or empty, return true for all transactions
-            if (searchValue == null || searchValue.isEmpty()) {
+            if (searchValue == null || searchValue.trim().isEmpty()) {
                 return criteriaBuilder.conjunction(); // Always true
             }
             String searchPattern = "%" + searchValue.toLowerCase() + "%";

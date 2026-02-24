@@ -52,7 +52,7 @@ public class TransactionController {
         return ResponseEntity.ok(response);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Response> updateTransactionStatus( @PathVariable Long id, @RequestParam TransactionStatus status){
+    public ResponseEntity<Response> updateTransactionStatus( @PathVariable Long id, @RequestBody TransactionStatus status){
         Response response = transactionService.updateTransactionStatus(id,status);
         return ResponseEntity.ok(response);
     }

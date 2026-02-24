@@ -16,6 +16,7 @@ import com.gonzalodev.InventoryMgtSystem.repositories.SupplierRepository;
 import com.gonzalodev.InventoryMgtSystem.repositories.TransactionRepository;
 import com.gonzalodev.InventoryMgtSystem.repositories.UserRepository;
 import com.gonzalodev.InventoryMgtSystem.services.TransactionService;
+import com.gonzalodev.InventoryMgtSystem.services.UserService;
 import com.gonzalodev.InventoryMgtSystem.specification.TransactionFilter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -36,6 +37,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
     private final ProductRepository productRepository;
+    private final UserService userService;
     private final SupplierRepository supplierRepository;
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
@@ -59,8 +61,7 @@ public class TransactionServiceImpl implements TransactionService {
         product.setStockQuantity(product.getStockQuantity() + quantity);
         productRepository.save(product);
         // change when have Spring security set up
-        User user = userRepository.findById(1L)
-                .orElseThrow(()-> new NotFoundException("User not found"));
+        User user = userService.getCurrentLoggedInUser();
 
         Transaction transaction = Transaction.builder()
                 .transactionType(TransactionType.PURCHASE)
@@ -187,9 +188,7 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction= transactionRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("Transaction not found"));
         TransactionDTO transactionDTO = modelMapper.map(transaction, TransactionDTO.class);
-        transactionDTO.setUser(null);
-        transactionDTO.setProduct(null);
-        transactionDTO.setSupplier(null);
+        transactionDTO.getUser().setTransactions(null);
 
         return  Response.builder()
                 .status(200)

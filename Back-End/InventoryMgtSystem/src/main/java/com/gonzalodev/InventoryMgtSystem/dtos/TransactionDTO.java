@@ -39,9 +39,9 @@ public class TransactionDTO {
 
     private LocalDateTime updatedAt;
 
-    private Product product;
+    private ProductDTO product;
 
-    private User user;
+    private UserDTO user;
 
-    private Supplier supplier;
+    private SupplierDTO supplier;
 }

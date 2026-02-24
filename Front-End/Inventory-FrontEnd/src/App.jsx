@@ -11,6 +11,8 @@ import ProductPage from './pages/ProductPage.jsx'
 import AddEditProductPage from './pages/AddEditProductPage.jsx'
 import PurchasePage from './pages/PurchasePage.jsx'
 import SellPage from './pages/SellPage.jsx'
+import TransactionsPage from './pages/TransactionsPage.jsx'
+import TransactionDetailsPage from './pages/TransactionDetailsPage.jsx'
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
         <Route path='/add-product' element={<AdminRoute><AddEditProductPage /></AdminRoute>}></Route>
         <Route path='/update-product/:productId' element={<AdminRoute><AddEditProductPage /></AdminRoute>}></Route>
         <Route path='/product' element={<AdminRoute><ProductPage /></AdminRoute>}></Route>
+        <Route path='/transaction' element={<AdminRoute><TransactionsPage /></AdminRoute>}></Route>
+        <Route path='/transaction/:transactionId' element={<AdminRoute><TransactionDetailsPage /></AdminRoute>}></Route>
 
         {/* Auth Routes */}
         <Route path='/dashboard' element={<Dashboard />}></Route>
