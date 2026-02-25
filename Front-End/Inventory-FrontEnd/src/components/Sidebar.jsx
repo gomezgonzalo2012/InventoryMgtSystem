@@ -4,13 +4,21 @@ import { logout, isAdmin, isAuthenticated } from '../service/ApiService'
 const logUserOut = () => {
     logout();
 }
-const Sidebar = () => {
-    const isAuth = isAuthenticated();
-    const isAdm = isAdmin();
+const isAuth = await isAuthenticated();
+const isAdm = await isAdmin();
+
+const Sidebar =  () => {
     return (
         <div className='sidebar'>
             <h1 className='ims'> IMS </h1>
             <ul className='nav-links'>
+                {isAdm && (
+                    <>
+                        <li><Link to="/category">Category</Link></li>
+                        <li><Link to="/product">Product</Link></li>
+                        <li><Link to="/supplier">Supplier</Link></li>
+                    </>
+                )}
                 {isAuth && (
                     <>
                         <li><Link to="/dashboard">Dashboard</Link></li>
@@ -22,13 +30,7 @@ const Sidebar = () => {
                     </>
                 )}
 
-                {isAdm && (
-                    <>
-                        <li><Link to="/category">Category</Link></li>
-                        <li><Link to="/product">Product</Link></li>
-                        <li><Link to="/supplier">Supplier</Link></li>
-                    </>
-                )}
+                
             </ul>
         </div>
     )

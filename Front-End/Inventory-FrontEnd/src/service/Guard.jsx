@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { isAdmin, isAuthenticated } from "./ApiService";
 import { Navigate, useLocation } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const location = useLocation();
 
-  if (!isAuthenticated()) {
-    // Redirect a login si no está autenticado
-    return <Navigate to="/login" replace state={{ from: location }} />;
-  }
+  useEffect(() => {
+    const check = async () => {
+      const auth = await isAuthenticated();
+      setIsAuth(auth);
+      setLoading(false);
+    };
+    check();
+  }, []);
 
-  return children;
+  if (loading) return null; 
+
+  // Si NO está autenticado, fuera. 
+  // Si SÍ está, no importa si es admin o no, lo dejamos pasar.
+  return isAuth ? children : <Navigate to="/login" replace state={{ from: location }} />;
 };
 
 export const AdminRoute = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [isAdm, setIsAdm] = useState(false);
   const location = useLocation();
-  if (!isAdmin()) {
-    // Si no es admin, podrías mandarlo al login o a una página de "No Autorizado"
-    return <Navigate to="/login" replace state={{ from: location }} />;
-  }
 
-  return children;
+  useEffect(() => {
+    const check = async () => {
+      const admin = await isAdmin();
+      setIsAdm(admin);
+      setLoading(false);
+    };
+    check();
+  }, []);
+
+  if (loading) return null;
+
+  // Si no es admin, lo mandamos a una ruta segura o login
+  return isAdm ? children : <Navigate to="/login" replace state={{ from: location }} />;
 };

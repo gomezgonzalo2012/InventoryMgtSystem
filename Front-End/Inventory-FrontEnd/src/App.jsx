@@ -34,7 +34,7 @@ function App() {
         <Route path='/transaction/:transactionId' element={<AdminRoute><TransactionDetailsPage /></AdminRoute>}></Route>
 
         {/* Auth Routes */}
-        <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path='/dashboard' element={<ProtectedRoute ><Dashboard /></ProtectedRoute>}></Route>
         <Route path='/purchase' element={<ProtectedRoute><PurchasePage /></ProtectedRoute>}></Route>
         <Route path='/sell' element={<ProtectedRoute><SellPage /></ProtectedRoute>}></Route>
         <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}></Route>
